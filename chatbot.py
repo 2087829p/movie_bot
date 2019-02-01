@@ -1,13 +1,9 @@
-# Building a ChatBot with Deep NLP
-
 import numpy as np
 import tensorflow as tf
 import re
 import time
 import ast
 from collections import Counter
-
-#### PART 1 - DATA PREPROCESSING #####
 
 #lines = open('movie_lines.txt', encoding='utf-8', errors='ignore').read().split('\n')
 conversations = open('movie_conversations.txt', encoding='utf-8', errors='ignore').read().split('\n')
@@ -103,7 +99,6 @@ for l in range(1, 26): # up to 25 + 1
             sorted_qs.append(q)
             sorted_as.append(a2int[i])
 
-# PART 2 - SEQ2SEQ MODEL
 def model_inputs():
     inputs = tf.placeholder(tf.int32, [None, None], 'input')
     targets = tf.placeholder(tf.int32, [None, None], 'target')
@@ -226,7 +221,6 @@ def seq2seq_model(inputs, targets, keep_prob, batch_size, sequence_length, answe
                                             batch_size)
     return training_pred, test_pred
 
-# PART 3 - TRAINING THE SEQ2SEQ MODEL
 
 # Setting Hyper params
 epochs = 100
@@ -347,7 +341,6 @@ for e in range(epochs):
     if early_stopping_check == early_stopping_stop:
         break
 
-## PART 4 - TESTING SEQ2SEQ MODEL
 
 # Loading the weights
 session = tf.InteractiveSession()
